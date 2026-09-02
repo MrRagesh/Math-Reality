@@ -575,7 +575,7 @@ function initNav(){
 
   // Active-section highlighting
   const navLinks = document.querySelectorAll(".nav-link, .mobile-link");
-  const sections = ["home","about","projects","gallery","videos","contact"]
+  const sections = ["about","projects","gallery","videos","contact"]
     .map(id => document.getElementById(id))
     .filter(Boolean);
 
@@ -873,7 +873,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initFaq();
   initTestimonials();
   initContactForm();
-  initHeroCanvas();
   initGalleryLightbox();
 
   const yearEl = document.getElementById("year");

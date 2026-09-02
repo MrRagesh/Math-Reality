@@ -36,14 +36,13 @@
 <!-- ================= NAVIGATION ================= -->
 <header class="nav-wrap" id="navWrap">
   <nav class="nav" aria-label="Primary">
-    <a href="#home" class="nav-logo" data-cursor="link">
+    <a href="#about" class="nav-logo" data-cursor="link">
       <img class="logo-mark" src="asset/logo.png" alt="MRL Logo" width="36" height="36">
       <span class="logo-text">MRL<span class="logo-sub">Mathematics Reality Lab</span></span>
     </a>
 
     <ul class="nav-links" id="navLinks">
-      <li><a href="#home" class="nav-link active" data-section="home">Home</a></li>
-      <li><a href="#about" class="nav-link" data-section="about">About</a></li>
+      <li><a href="#about" class="nav-link active" data-section="about">About</a></li>
       <li><a href="#projects" class="nav-link" data-section="projects">Project</a></li>
       <li><a href="#gallery" class="nav-link" data-section="gallery">Gallery</a></li>
       <li><a href="#videos" class="nav-link" data-section="videos">Videos</a></li>
@@ -61,8 +60,7 @@
 
   <div class="mobile-menu" id="mobileMenu">
     <ul>
-      <li><a href="#home" class="mobile-link" data-section="home">Home</a></li>
-      <li><a href="#about" class="mobile-link" data-section="about">About</a></li>
+      <li><a href="#about" class="mobile-link active" data-section="about">About</a></li>
       <li><a href="#projects" class="mobile-link" data-section="projects">Project</a></li>
       <li><a href="#gallery" class="mobile-link" data-section="gallery">Gallery</a></li>
       <li><a href="#videos" class="mobile-link" data-section="videos">Videos</a></li>
@@ -74,93 +72,42 @@
 
 <main id="main">
 
-  <!-- ================= HERO ================= -->
-  <section class="hero" id="home">
-    <div class="hero-math-bg" aria-hidden="true">
-      <svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" class="hero-grid-svg">
-        <defs>
-          <pattern id="gridPattern" width="60" height="60" patternUnits="userSpaceOnUse">
-            <path d="M 60 0 L 0 0 0 60" fill="none" stroke="currentColor" stroke-width="1"/>
-          </pattern>
-        </defs>
-        <rect width="1200" height="900" fill="url(#gridPattern)" />
-      </svg>
-      <span class="floating-symbol sym-1">∫</span>
-      <span class="floating-symbol sym-2">∑</span>
-      <span class="floating-symbol sym-3">π</span>
-      <span class="floating-symbol sym-4">∇</span>
-      <span class="floating-symbol sym-5">λ</span>
-      <span class="floating-symbol sym-6">θ</span>
-      <span class="floating-symbol sym-7">∞</span>
-      <span class="floating-symbol sym-8">√</span>
+  <!-- ================= ABOUT / LANDING ================= -->
+  <section class="about-landing" id="about">
+    <div class="about-math-bg" aria-hidden="true">
+      <span class="about-float about-float-1">∫</span>
+      <span class="about-float about-float-2">∑</span>
+      <span class="about-float about-float-3">π</span>
+      <span class="about-float about-float-4">∇</span>
+      <span class="about-float about-float-5">λ</span>
+      <span class="about-float about-float-6">θ</span>
+      <span class="about-float about-float-7">∞</span>
+      <span class="about-float about-float-8">√</span>
     </div>
 
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <p class="eyebrow"><span class="eyebrow-dot"></span>Applied &amp; Experimental Mathematics</p>
-        <h1 class="hero-title">
-          Mathematics, <span class="text-gradient">engineered</span><br>
-          into the real world.
-        </h1>
-        <p class="hero-sub">
-          Mathematics Reality Lab turns theorems, transforms and equations into working
-          experiments — from RLC circuits to robotic motion — giving students real,
-          hands-on experience solving problems the way industry actually does.
+    <div class="about-landing-inner">
+      <div class="about-landing-head">
+        <p class="eyebrow"><span class="eyebrow-dot"></span>Inside the Lab · About MRL</p>
+        <h1 class="about-landing-title">Where equations leave the page.</h1>
+        <p class="about-landing-desc">
+          A deeper look at how MRL moves mathematics from the classroom into real-world experiments.
         </p>
-        <div class="hero-actions">
+        <div class="about-landing-actions">
           <a href="#projects" class="btn btn-primary btn-glow">
             Explore Projects <span class="btn-arrow">→</span>
           </a>
           <a href="#contact" class="btn btn-ghost">Work With Us</a>
         </div>
-        <div class="hero-meta">
-          <div class="hero-meta-item">
-            <span class="hero-meta-num">15</span>
-            <span class="hero-meta-label">Applied mathematics<br>experiment concepts</span>
-          </div>
-          <div class="hero-meta-divider" aria-hidden="true"></div>
-          <div class="hero-meta-item">
-            <span class="hero-meta-num">1:1</span>
-            <span class="hero-meta-label">Theory mapped to<br>real application</span>
-          </div>
-        </div>
       </div>
 
-      <div class="hero-visual" aria-hidden="true">
-        <div class="orbit-card">
-          <canvas id="curveCanvas" class="curve-canvas"></canvas>
-          <div class="orbit-frame-label">
-            <span class="mono">f(x,y) → reality</span>
-          </div>
-          <div class="chip chip-1"><span class="mono">∮ F·dr</span></div>
-          <div class="chip chip-2"><span class="mono">e^(iπ)+1=0</span></div>
-          <div class="chip chip-3"><span class="mono">λ, v</span></div>
-        </div>
-      </div>
-    </div>
-
-    <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
-      <span class="scroll-cue-line"></span>
-      <span>Scroll</span>
-    </a>
-  </section>
-
-  <!-- ================= ABOUT ================= -->
-  <section class="section about" id="about">
-    <div class="section-inner">
-      <div class="section-head">
-        <p class="eyebrow"><span class="eyebrow-dot"></span>About MRL</p>
-        <h2 class="section-title">Where equations leave the page.</h2>
-      </div>
-
-      <div class="about-grid">
+      <div class="about-grid about-grid-landing">
         <div class="about-media">
-          <div class="about-media-frame">
+          <div class="about-media-frame about-media-frame-landing">
             <img src="asset/logo.png" alt="MRL Logo" class="about-logo">
           </div>
-          <div class="about-media-copy">
+          <div class="about-media-copy about-media-copy-landing">
             <p class="lead-text">
-              Mathematics Reality Lab (MRL) gives students the opportunity to apply
+              Mathematics Reality Lab gives students the opportunity to apply
               mathematical concepts to real-world problems — moving learning beyond
               the page and into experiments that mirror the challenges of industry.
             </p>
@@ -168,9 +115,8 @@
         </div>
 
         <div class="about-content">
-
           <div class="about-cards">
-            <div class="about-card reveal">
+            <div class="about-card reveal reveal-delay-1">
               <span class="about-card-icon" aria-hidden="true">◆</span>
               <h3>Vision</h3>
               <p>To give students the opportunity to apply mathematical concepts to
@@ -178,7 +124,7 @@
               them to meet the challenges of industry.</p>
             </div>
 
-            <div class="about-card reveal">
+            <div class="about-card reveal reveal-delay-2">
               <span class="about-card-icon" aria-hidden="true">◆</span>
               <h3>Objectives</h3>
               <ul class="about-list">
@@ -190,7 +136,7 @@
               </ul>
             </div>
 
-            <div class="about-card reveal">
+            <div class="about-card reveal reveal-delay-3">
               <span class="about-card-icon" aria-hidden="true">◆</span>
               <h3>Expected Outcomes</h3>
               <ul class="about-list">
@@ -367,7 +313,7 @@
 <footer class="footer">
   <div class="footer-inner">
     <div class="footer-brand">
-      <a href="#home" class="nav-logo">
+      <a href="#about" class="nav-logo">
         <img class="logo-mark" src="asset/logo.png" alt="MRL Logo" width="36" height="36">
         <span class="logo-text">MRL<span class="logo-sub">Mathematics Reality Lab</span></span>
       </a>
@@ -379,7 +325,6 @@
     <div class="footer-col">
       <h4>Explore</h4>
       <ul>
-        <li><a href="#home">Home</a></li>
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#gallery">Gallery</a></li>
