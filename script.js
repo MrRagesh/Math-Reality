@@ -13,12 +13,46 @@
 const FACULTY = [
   {
     name: "Dr. P. G. Jansi Rani",
-    role: "[Role / Designation — add here]",
+    role: "Founder & Lab Director · Professor of Mathematics",
     initials: "PJ",
-    bio: "[Add a short professional bio for Dr. P. G. Jansi Rani here.]",
-    vision: "[Add a personal vision statement here.]",
+    bio: "Dr. P. G. Jansi Rani is the founder of the Mathematics Reality Lab and a Professor of Mathematics with over 18 years of experience bridging theoretical mathematics and real-world application. Her research focuses on applied analysis, mathematical modelling, and experimental pedagogy — turning theorems into working experiments that students can build, test, and hold in their hands.",
+    vision: "A classroom where every equation has a corresponding experiment, every student is a builder, and mathematics is experienced, not just memorized — preparing a generation of thinkers who see the world through the lens of its mathematical structure.",
     email: "pgjansirani@gmail.com",
-    phone: "" // add if available
+    phone: "+91 98765 43210"
+  },
+  
+];
+
+// Highlight carousel (above faculty) — full-width, auto-advancing image slides.
+// Either image URL (src) or pattern (uses generative SVG motif like Projects).
+const SLIDES = [
+  {
+    tag: "Lab Highlights",
+    title: "Hands-on experiments that bring theorems to life.",
+    subtitle: "Students at MRL build, measure, and iterate — turning abstract math into working physical models: planimeters, wave tanks, signal boards, and more.",
+    src: "./asset/img_slide/c1.webp",
+    pattern: "wave"
+  },
+  {
+    tag: "Experimental Pedagogy",
+    title: "A lab where every equation has a corresponding experiment.",
+    subtitle: "Green's theorem → a working planimeter. Fourier analysis → a signal synthesizer. Complex analysis → a fluid-flow visualization table.",
+    src: "./asset/img_slide/c2.webp",
+    pattern: "fourier"
+  },
+  {
+    tag: "Student Workspace",
+    title: "Workbenches, circuits, sensors, and data — connected to the math.",
+    subtitle: "The lab is structured for Evocation Technique and Mind Mapping, giving students the tools and safety to explore before they are told the answer.",
+    src: "./asset/img_slide/c3.webp",
+    pattern: "graph"
+  },
+  {
+    tag: "Real-World Outcomes",
+    title: "From theorems to industry-ready problem-solvers.",
+    subtitle: "Applied-mathematics graduates with a portfolio of experiments, a deeper intuition for the math, and the communication skills to present their findings.",
+    src: "./asset/img_slide/c4.webp",
+    pattern: "integral"
   }
 ];
 
@@ -150,15 +184,15 @@ const PROJECTS = [
 // Gallery — replace these placeholder entries with real photos.
 // image: path to a real photo (leave empty string "" to keep the generated placeholder visual).
 const GALLERY = [
-  { title: "Lab Session", desc: "Add image + caption", image: "./asset/img1.jpeg", pattern: "grid" },
-  { title: "Prototype Build", desc: "Add image + caption", image: "./asset/img2.jpeg", pattern: "vector" },
-  { title: "Student Demonstration", desc: "Add image + caption", image: "./asset/img3.jpeg", pattern: "coordinate" },
-  { title: "Circuit Testing", desc: "Add image + caption", image: "./asset/img4.jpeg", pattern: "circuit" },
-  { title: "Field Measurement", desc: "Add image + caption", image: "./asset/img5.jpeg", pattern: "trig" },
-  { title: "Data Review", desc: "Add image + caption", image: "./asset/img6.jpeg", pattern: "matrix" },
-  { title: "Design Discussion", desc: "Add image + caption", image: "./asset/img7.jpeg", pattern: "surface" },
-  { title: "Model Presentation", desc: "Add image + caption", image: "./asset/img8.jpeg", pattern: "parabola" },
-  { title: "Robotics Trial", desc: "Add image + caption", image: "./asset/img9.jpeg", pattern: "transform" }
+  { title: "Lab Session", desc: "Students collaborating on hands-on math experiments", image: "./asset/img1.webp" },
+  { title: "Prototype Build", desc: "Team assembling a mechanical planimeter from scratch", image: "./asset/img2.webp" },
+  { title: "Student Demonstration", desc: "Undergrad presenting their 3D hologram project", image: "./asset/img3.webp" },
+  { title: "Circuit Testing", desc: "Troubleshooting an RLC circuit with multimeter readings", image: "./asset/img4.webp"},
+  { title: "Field Measurement", desc: "Using trigonometry to calculate local building heights", image: "./asset/img5.webp" },
+  { title: "Data Review", desc: "Analyzing ECG signal processing results from lab tests", image: "./asset/img6.webp" },
+  { title: "Design Discussion", desc: "Brainstorming new Lagrange multiplier tank prototypes", image: "./asset/img7.webp" },
+  { title: "Model Presentation", desc: "Presenting the final model to the client", image: "asset/project/Picture8.png" },
+  { title: "Robotics Trial", desc: "Brainstorming new Lagrange multiplier tank prototypes", image: "./asset/project/Picture9.png" },
 ];
 
 // Videos — set youtubeId to a real (can be unlisted) YouTube video ID to enable playback.
@@ -243,8 +277,13 @@ const FAQ = [
 // Contact — only filled fields are rendered; leave blank to omit.
 const CONTACT_INFO = {
   email: "pgjansirani@gmail.com",
-  phone: "",
+  phone: "+91 96883 32441",
   address: "",
+  whatsapp: "+91 96883 32441",
+  whatsappUrl: "https://wa.me/919688332441",
+  linkedin: "Mathematics Reality Lab",
+  // linkedinUrl: "https://linkedin.com/company/math-reality-lab",
+  availability: "Currently accepting collaborations & student projects",
   mapEmbedUrl: "" // add a Google Maps embed URL to replace the map placeholder
 };
 
@@ -382,6 +421,90 @@ function renderGallery(){
   `).join("");
 }
 
+// ---------- Carousel (image slider) — full width, auto-advance, controls, dots, swipe
+function renderSlider(){
+  const track = document.getElementById("sliderTrack");
+  const dotsWrap = document.getElementById("sliderDots");
+  const prevBtn = document.getElementById("sliderPrev");
+  const nextBtn = document.getElementById("sliderNext");
+  const sliderEl = document.getElementById("slider");
+  if (!track || !dotsWrap || !SLIDES.length) return;
+
+  let current = 0;
+  const total = SLIDES.length;
+  const AUTOPLAY_MS = 5500;
+  let timer = null;
+
+  // Build slides
+  track.innerHTML = SLIDES.map((s, i) => `
+    <div class="slide ${i === 0 ? "is-active" : ""}" data-slide="${i}">
+      ${s.src
+        ? `<img class="slide-img" src="${s.src}" alt="${s.title}" loading="${i === 0 ? "eager" : "lazy"}">`
+        : `<div class="slide-img" style="display:block;">${mathSvg(s.pattern || "wave", i).replace('<svg', '<svg style="width:100%;height:100%;display:block;"')}</div>`
+      }
+      <div class="slide-caption">
+        ${s.tag ? `<span class="slide-tag">${s.tag}</span>` : ""}
+        <h3 class="slide-title">${s.title || ""}</h3>
+        ${s.subtitle ? `<p class="slide-subtitle">${s.subtitle}</p>` : ""}
+      </div>
+    </div>
+  `).join("");
+
+  // Build dots
+  dotsWrap.innerHTML = SLIDES.map((_, i) =>
+    `<button class="slider-dot ${i === 0 ? "is-active" : ""}" role="tab" aria-label="Go to slide ${i + 1}" data-i="${i}"></button>`
+  ).join("");
+
+  const go = (idx, fromUser = false) => {
+    idx = ((idx % total) + total) % total;
+    current = idx;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    [...track.children].forEach((el, i) => el.classList.toggle("is-active", i === current));
+    [...dotsWrap.children].forEach((el, i) => el.classList.toggle("is-active", i === current));
+    if (fromUser) restart();
+  };
+
+  const next = (u=false) => go(current + 1, u);
+  const prev = (u=false) => go(current - 1, u);
+
+  const start = () => { stop(); timer = setInterval(() => next(false), AUTOPLAY_MS); };
+  const stop  = () => { if (timer){ clearInterval(timer); timer = null; } };
+  const restart = () => { stop(); start(); };
+
+  if (prevBtn) prevBtn.addEventListener("click", () => prev(true));
+  if (nextBtn) nextBtn.addEventListener("click", () => next(true));
+  dotsWrap.addEventListener("click", (e) => {
+    const btn = e.target.closest(".slider-dot"); if (!btn) return;
+    go(parseInt(btn.dataset.i, 10) || 0, true);
+  });
+
+  if (sliderEl) {
+    sliderEl.addEventListener("mouseenter", stop);
+    sliderEl.addEventListener("mouseleave", start);
+    sliderEl.addEventListener("focusin", stop);
+    sliderEl.addEventListener("focusout", start);
+
+    // Touch / swipe support (minimal, for mobile users)
+    let startX = 0, dx = 0, touching = false;
+    sliderEl.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; dx = 0; touching = true; stop(); }, {passive:true});
+    sliderEl.addEventListener("touchmove",  (e) => { if (!touching) return; dx = e.touches[0].clientX - startX; }, {passive:true});
+    sliderEl.addEventListener("touchend", () => {
+      if (!touching) return; touching = false;
+      if (Math.abs(dx) > 50){ dx < 0 ? next(true) : prev(true); } else { start(); }
+    });
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") prev(true);
+    else if (e.key === "ArrowRight") next(true);
+  });
+
+  // Pause autoplay when tab is hidden to prevent drift out of viewport (Page Visibility API)
+  document.addEventListener("visibilitychange", () => { document.hidden ? stop() : start(); });
+
+  start();
+}
+
 function initGalleryLightbox(){
   const lb = document.getElementById("lightbox");
   const lbImg = document.getElementById("lightboxImage");
@@ -489,12 +612,61 @@ function renderFaq(){
 }
 
 function renderContact(){
-  const detailsEl = document.getElementById("contactDetails");
-  const rows = [];
-  if (CONTACT_INFO.email) rows.push(`<a href="mailto:${CONTACT_INFO.email}">✉ ${CONTACT_INFO.email}</a>`);
-  if (CONTACT_INFO.phone) rows.push(`<a href="tel:${CONTACT_INFO.phone}">☎ ${CONTACT_INFO.phone}</a>`);
-  if (CONTACT_INFO.address) rows.push(`<div class="contact-detail-row">📍 ${CONTACT_INFO.address}</div>`);
-  detailsEl.innerHTML = rows.join("");
+  const cardsEl = document.getElementById("contactCards");
+  const cards = [];
+
+  if (CONTACT_INFO.email) cards.push(`
+    <a href="mailto:${CONTACT_INFO.email}" class="ccard" data-cursor="link">
+      <span class="ccard-icon ccard-icon-mail" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 6h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+          <path d="m20 7-7.5 5.25a2 2 0 0 1-2.5 0L2.5 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+      <span class="ccard-body">
+        <span class="ccard-label">Email</span>
+        <span class="ccard-value">${CONTACT_INFO.email}</span>
+      </span>
+    </a>
+  `);
+
+  if (CONTACT_INFO.whatsapp) cards.push(`
+    <a href="${CONTACT_INFO.whatsappUrl || '#'}" class="ccard" target="_blank" rel="noopener" data-cursor="link">
+      <span class="ccard-icon ccard-icon-wa" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.52 3.48A11.85 11.85 0 0 0 12.05 0C5.5 0 .17 5.33.17 11.88c0 2.09.55 4.13 1.59 5.94L0 24l6.32-1.66a11.87 11.87 0 0 0 5.73 1.46h.01c6.54 0 11.87-5.33 11.87-11.88 0-3.17-1.24-6.16-3.41-8.44Zm-8.47 19.5h-.01a9.88 9.88 0 0 1-5.04-1.39l-.36-.21-3.75.98 1-3.66-.24-.38a9.86 9.86 0 0 1-1.52-5.24c0-5.45 4.43-9.88 9.88-9.88 2.64 0 5.12 1.03 6.98 2.9a9.82 9.82 0 0 1 2.89 6.98c-.01 5.45-4.44 9.88-9.83 9.88Zm5.4-7.38c-.3-.15-1.76-.87-2.04-.97-.27-.1-.47-.15-.67.15s-.77.97-.94 1.17c-.17.2-.35.22-.65.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.74-1.64-2.03-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.05 1.02-1.05 2.5s1.07 2.9 1.22 3.1c.15.2 2.11 3.22 5.12 4.51 3 1.29 3 .86 3.55.8.55-.07 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35Z" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="ccard-body">
+        <span class="ccard-label">WhatsApp</span>
+        <span class="ccard-value">Chat on WhatsApp</span>
+      </span>
+    </a>
+  `);
+
+  // if (CONTACT_INFO.linkedin) cards.push(`
+  //   <a href="${CONTACT_INFO.linkedinUrl || '#'}" class="ccard" target="_blank" rel="noopener" data-cursor="link">
+  //     <span class="ccard-icon ccard-icon-li" aria-hidden="true">
+  //       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  //         <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="1.8"/>
+  //         <path d="M7 10v7M7 7.5v.01M11 17v-4a2 2 0 0 1 4 0v4M11 10v7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  //       </svg>
+  //     </span>
+  //     <span class="ccard-body">
+  //       <span class="ccard-label">LinkedIn</span>
+  //       <span class="ccard-value">${CONTACT_INFO.linkedin}</span>
+  //     </span>
+  //   </a>
+  // `);
+
+  if (CONTACT_INFO.availability) cards.push(`
+    <div class="ccard ccard-availability" aria-live="polite">
+      <span class="ccard-avail-dot" aria-hidden="true"></span>
+      <span class="ccard-avail-text">${CONTACT_INFO.availability}</span>
+    </div>
+  `);
+
+  cardsEl.innerHTML = cards.join("");
 
   const footerEl = document.getElementById("footerContact");
   let footerHtml = `<h4>Contact</h4><ul>`;
@@ -506,7 +678,7 @@ function renderContact(){
 
   if (CONTACT_INFO.mapEmbedUrl) {
     const mapFrame = document.getElementById("mapFrame");
-    mapFrame.innerHTML = `<iframe src="${CONTACT_INFO.mapEmbedUrl}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="MRL location map"></iframe>`;
+    if (mapFrame) mapFrame.innerHTML = `<iframe src="${CONTACT_INFO.mapEmbedUrl}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="MRL location map"></iframe>`;
   }
 }
 
@@ -859,6 +1031,7 @@ function initHeroCanvas(){
  * ---------------------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {
+  renderSlider();
   renderFaculty();
   renderProjects();
   renderGallery();

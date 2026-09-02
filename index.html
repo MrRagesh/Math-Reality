@@ -75,6 +75,43 @@
   <!-- ================= ABOUT / LANDING ================= -->
   <section class="about-landing" id="about">
     <div class="about-math-bg" aria-hidden="true">
+      <div class="neon-orbs" aria-hidden="true">
+        <span class="neon-orb neon-orb-1"></span>
+        <span class="neon-orb neon-orb-2"></span>
+        <span class="neon-orb neon-orb-3"></span>
+      </div>
+
+      <svg class="neon-grid" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="ngx" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#2F5FFF" stop-opacity="0"/>
+            <stop offset=".5" stop-color="#00C2FF" stop-opacity=".55"/>
+            <stop offset="1" stop-color="#FF3DC6" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="ngy" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#00FFB0" stop-opacity="0"/>
+            <stop offset=".5" stop-color="#8B5BFF" stop-opacity=".45"/>
+            <stop offset="1" stop-color="#2F5FFF" stop-opacity="0"/>
+          </linearGradient>
+          <pattern id="ngdots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+            <circle cx="20" cy="20" r="1.4" fill="#00C2FF" opacity=".35"/>
+          </pattern>
+        </defs>
+        <rect width="1200" height="900" fill="url(#ngdots)"/>
+        <g stroke="url(#ngx)" stroke-width="1" opacity=".9">
+          <line x1="0" y1="120" x2="1200" y2="120"/>
+          <line x1="0" y1="300" x2="1200" y2="300"/>
+          <line x1="0" y1="500" x2="1200" y2="500"/>
+          <line x1="0" y1="720" x2="1200" y2="720"/>
+        </g>
+        <g stroke="url(#ngy)" stroke-width="1" opacity=".9">
+          <line x1="180" y1="0" x2="180" y2="900"/>
+          <line x1="520" y1="0" x2="520" y2="900"/>
+          <line x1="840" y1="0" x2="840" y2="900"/>
+          <line x1="1080" y1="0" x2="1080" y2="900"/>
+        </g>
+      </svg>
+
       <span class="about-float about-float-1">∫</span>
       <span class="about-float about-float-2">∑</span>
       <span class="about-float about-float-3">π</span>
@@ -83,51 +120,80 @@
       <span class="about-float about-float-6">θ</span>
       <span class="about-float about-float-7">∞</span>
       <span class="about-float about-float-8">√</span>
+      <span class="about-float about-float-9">∂</span>
+      <span class="about-float about-float-10">Δ</span>
+      <span class="about-float about-float-11">Ω</span>
+      <span class="about-float about-float-12">α</span>
+
+      <div class="eqn-strip eqn-strip-a" aria-hidden="true">
+        <span>∇·E = ρ/ε₀</span>
+        <span class="dot-sep">•</span>
+        <span>e<sup>iπ</sup> + 1 = 0</span>
+        <span class="dot-sep">•</span>
+        <span>F = ma</span>
+        <span class="dot-sep">•</span>
+        <span>∮ F·dr</span>
+        <span class="dot-sep">•</span>
+        <span>sin²θ + cos²θ = 1</span>
+        <span class="dot-sep">•</span>
+        <span>λ = h/p</span>
+        <span class="dot-sep">•</span>
+        <span>∂y/∂t + c·∇y = 0</span>
+        <span class="dot-sep">•</span>
+        <span>∑<sub>n=1</sub><sup>∞</sup> 1/n² = π²/6</span>
+        <span class="dot-sep">•</span>
+        <span>A = πr²</span>
+      </div>
+      <div class="eqn-strip eqn-strip-b" aria-hidden="true">
+        <span>Δx·Δp ≥ ℏ/2</span>
+        <span class="dot-sep">•</span>
+        <span>V = IR</span>
+        <span class="dot-sep">•</span>
+        <span>E = mc²</span>
+        <span class="dot-sep">•</span>
+        <span>φ = (1+√5)/2</span>
+        <span class="dot-sep">•</span>
+        <span>P(X=x) = λˣ·e⁻ˣ/x!</span>
+        <span class="dot-sep">•</span>
+        <span>∇ × B = μ₀J + …</span>
+        <span class="dot-sep">•</span>
+        <span>f(t) = a₀/2 + ∑…</span>
+        <span class="dot-sep">•</span>
+        <span>Γ(n) = ∫₀<sup>∞</sup> tⁿ⁻¹ e⁻ᵗ dt</span>
+      </div>
     </div>
 
     <div class="about-landing-inner">
       <div class="about-landing-head">
         <p class="eyebrow"><span class="eyebrow-dot"></span>Inside the Lab · About MRL</p>
-        <h1 class="about-landing-title">Where equations leave the page.</h1>
+        <h1 class="about-landing-title">Math <span class="text-gradient-neon">Reality Lab</span></h1>
         <p class="about-landing-desc">
-          A deeper look at how MRL moves mathematics from the classroom into real-world experiments.
+          <span class="certificate_id">UDYAM-TN-27-0149456</span><br>
+          Geteway to Exploring the Power of Math Applications
         </p>
         <div class="about-landing-actions">
-          <a href="#projects" class="btn btn-primary btn-glow">
+          <a href="#projects" class="btn btn-primary btn-glow btn-glow-neon">
             Explore Projects <span class="btn-arrow">→</span>
           </a>
-          <a href="#contact" class="btn btn-ghost">Work With Us</a>
+          <a href="#contact" class="btn btn-ghost btn-ghost-neon">Work With Us</a>
         </div>
       </div>
 
       <div class="about-grid about-grid-landing">
-        <div class="about-media">
-          <div class="about-media-frame about-media-frame-landing">
-            <img src="asset/logo.png" alt="MRL Logo" class="about-logo">
-          </div>
-          <div class="about-media-copy about-media-copy-landing">
-            <p class="lead-text">
-              Mathematics Reality Lab gives students the opportunity to apply
-              mathematical concepts to real-world problems — moving learning beyond
-              the page and into experiments that mirror the challenges of industry.
-            </p>
-          </div>
-        </div>
-
         <div class="about-content">
           <div class="about-cards">
-            <div class="about-card reveal reveal-delay-1">
-              <span class="about-card-icon" aria-hidden="true">◆</span>
-              <h3>Vision</h3>
+            <div class="about-card glass-card reveal reveal-delay-1">
+              <span class="about-card-icon about-card-icon-neon" aria-hidden="true">◆</span>
+              <h3 class="about-card-title-neon">Vision</h3>
               <p>To give students the opportunity to apply mathematical concepts to
               real-world problems — enhancing problem-solving skills and preparing
               them to meet the challenges of industry.</p>
             </div>
 
-            <div class="about-card reveal reveal-delay-2">
-              <span class="about-card-icon" aria-hidden="true">◆</span>
-              <h3>Objectives</h3>
-              <ul class="about-list">
+            <div class="about-card glass-card reveal reveal-delay-2">
+              <span class="about-card-icon about-card-icon-neon" aria-hidden="true">◆</span>
+              <h3 class="about-card-title-neon">Objectives</h3>
+              <ul class="about-list about-list-neon">
                 <li>Real-time, application-oriented mathematical experiments</li>
                 <li>Development of critical thinking &amp; problem-solving ability</li>
                 <li>Stronger presentation and communication skills</li>
@@ -136,10 +202,10 @@
               </ul>
             </div>
 
-            <div class="about-card reveal reveal-delay-3">
-              <span class="about-card-icon" aria-hidden="true">◆</span>
-              <h3>Expected Outcomes</h3>
-              <ul class="about-list">
+            <div class="about-card glass-card reveal reveal-delay-3">
+              <span class="about-card-icon about-card-icon-neon" aria-hidden="true">◆</span>
+              <h3 class="about-card-title-neon">Expected Outcomes</h3>
+              <ul class="about-list about-list-neon">
                 <li>A deeper understanding of mathematical concepts and their real-time applications</li>
                 <li>Improved critical thinking</li>
                 <li>Improved problem-solving skills</li>
@@ -148,7 +214,34 @@
             </div>
           </div>
         </div>
+
+        <div class="about-media about-media-right">
+          <div class="about-media-frame about-media-frame-landing about-media-frame-neon">
+            <div class="neon-frame-glow" aria-hidden="true"></div>
+            <img src="asset/logo.png" alt="MRL Logo" class="about-logo">
+            <div class="neon-badge neon-badge-tl"><span class="mono">φ ≈ 1.618</span></div>
+            <div class="neon-badge neon-badge-br"><span class="mono">∮ reality</span></div>
+            <div class="neon-ring-scan" aria-hidden="true"></div>
+          </div>
+          <div class="about-media-copy about-media-copy-landing about-media-copy-neon">
+            <p class="lead-text">
+              Mathematics Reality Lab gives students the opportunity to apply
+              mathematical concepts to real-world problems — moving learning beyond
+              the page and into experiments that mirror the challenges of industry.
+            </p>
+          </div>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ================= HIGHLIGHT CAROUSEL ================= -->
+  <section class="section carousel-section" id="carouselSection">
+    <div class="slider" id="slider">
+      <div class="slider-track" id="sliderTrack"><!-- slides rendered by script.js --></div>
+      <button class="slider-btn slider-btn-prev" id="sliderPrev" aria-label="Previous slide" data-cursor="link">‹</button>
+      <button class="slider-btn slider-btn-next" id="sliderNext" aria-label="Next slide" data-cursor="link">›</button>
+      <div class="slider-dots" id="sliderDots" role="tablist"></div>
     </div>
   </section>
 
@@ -165,10 +258,86 @@
 
   <!-- ================= PROJECTS ================= -->
   <section class="section projects" id="projects">
-    <div class="section-inner">
+    <div class="proj-bg" aria-hidden="true">
+      <div class="proj-orbs" aria-hidden="true">
+        <span class="proj-orb proj-orb-1"></span>
+        <span class="proj-orb proj-orb-2"></span>
+        <span class="proj-orb proj-orb-3"></span>
+        <span class="proj-orb proj-orb-4"></span>
+      </div>
+
+      <svg class="proj-grid" viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="pgx" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0" stop-color="#FF3DC6" stop-opacity="0"/>
+            <stop offset=".5" stop-color="#8B5BFF" stop-opacity=".65"/>
+            <stop offset="1" stop-color="#00E5FF" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="pgy" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#00FFA8" stop-opacity="0"/>
+            <stop offset=".5" stop-color="#FFB84D" stop-opacity=".45"/>
+            <stop offset="1" stop-color="#FF3DC6" stop-opacity="0"/>
+          </linearGradient>
+          <pattern id="pgdots" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
+            <circle cx="16" cy="16" r="1.2" fill="#FF3DC6" opacity=".3"/>
+          </pattern>
+        </defs>
+        <rect width="1200" height="900" fill="url(#pgdots)"/>
+        <g stroke="url(#pgx)" stroke-width="1.2" opacity=".95">
+          <line x1="0" y1="80" x2="1200" y2="80"/>
+          <line x1="0" y1="220" x2="1200" y2="220"/>
+          <line x1="0" y1="380" x2="1200" y2="380"/>
+          <line x1="0" y1="560" x2="1200" y2="560"/>
+          <line x1="0" y1="740" x2="1200" y2="740"/>
+        </g>
+        <g stroke="url(#pgy)" stroke-width="1.2" opacity=".95">
+          <line x1="120" y1="0" x2="120" y2="900"/>
+          <line x1="340" y1="0" x2="340" y2="900"/>
+          <line x1="620" y1="0" x2="620" y2="900"/>
+          <line x1="900" y1="0" x2="900" y2="900"/>
+          <line x1="1080" y1="0" x2="1080" y2="900"/>
+        </g>
+      </svg>
+
+      <div class="proj-scanlines" aria-hidden="true"></div>
+
+      <span class="proj-float proj-float-1">∮</span>
+      <span class="proj-float proj-float-2">⟨⟩</span>
+      <span class="proj-float proj-float-3">∂</span>
+      <span class="proj-float proj-float-4">⊕</span>
+      <span class="proj-float proj-float-5">∇×</span>
+      <span class="proj-float proj-float-6">∏</span>
+      <span class="proj-float proj-float-7">⊗</span>
+      <span class="proj-float proj-float-8">ℒ</span>
+      <span class="proj-float proj-float-9">∀</span>
+      <span class="proj-float proj-float-10">∃</span>
+
+      <div class="proj-strip proj-strip-x" aria-hidden="true">
+        <span>RLC · Fourier · Laplace · Taylor · Wave · Heat · Navier–Stokes · Chaos · Graph · Topology · FFT · Control · Probability · Markov</span>
+        <span class="proj-dot">◈</span>
+        <span>RLC · Fourier · Laplace · Taylor · Wave · Heat · Navier–Stokes · Chaos · Graph · Topology · FFT · Control · Probability · Markov</span>
+        <span class="proj-dot">◈</span>
+      </div>
+      <div class="proj-strip proj-strip-y" aria-hidden="true">
+        <span>● Matrix ● ODE ● PDE ● Eigen ● Stats ● Optim ● Signals ● Robotics ● Crypto ● Game ● Geometry ● Number ● Combinatorics</span>
+      </div>
+
+      <div class="proj-sparkles" aria-hidden="true">
+        <span class="sparkle sp-1"></span>
+        <span class="sparkle sp-2"></span>
+        <span class="sparkle sp-3"></span>
+        <span class="sparkle sp-4"></span>
+        <span class="sparkle sp-5"></span>
+        <span class="sparkle sp-6"></span>
+        <span class="sparkle sp-7"></span>
+        <span class="sparkle sp-8"></span>
+      </div>
+    </div>
+
+    <div class="section-inner proj-inner">
       <div class="section-head">
         <p class="eyebrow"><span class="eyebrow-dot"></span>Applied Mathematics, in Action</p>
-        <h2 class="section-title">15 concepts. 15 real experiments.</h2>
+        <h2 class="section-title proj-section-title"><span class="text-gradient-neon-alt">15 concepts. 15 real experiments.</span></h2>
         <p class="section-desc">Each project pairs a core mathematical concept with a
         tangible, working model — the same way mathematics is used to solve problems
         in engineering, robotics and signal processing.</p>
@@ -224,6 +393,12 @@
 
   <!-- ================= FAQ ================= -->
   <section class="section faq" id="faq">
+    <div class="faq-particles" aria-hidden="true">
+      <span class="p-orb o1"></span>
+      <span class="p-orb o2"></span>
+      <span class="p-orb o3"></span>
+      <span class="p-orb o4"></span>
+    </div>
     <div class="section-inner faq-inner">
       <div class="section-head">
         <p class="eyebrow"><span class="eyebrow-dot"></span>FAQ</p>
@@ -244,17 +419,8 @@
       </div>
 
       <div class="contact-grid">
-        <div class="contact-map-col">
-          <div class="map-frame" id="mapFrame">
-            <!-- Replace MAP_EMBED_URL in script.js (CONTACT_INFO.mapEmbedUrl) with the real Google Maps embed link -->
-            <div class="map-placeholder">
-              <span class="map-placeholder-icon" aria-hidden="true">◈</span>
-              <p>Map location to be added</p>
-              <span class="map-placeholder-sub">Set CONTACT_INFO.mapEmbedUrl in script.js</span>
-            </div>
-          </div>
-
-          <div class="contact-details" id="contactDetails"><!-- rendered by script.js --></div>
+        <div class="contact-info-col">
+          <div class="contact-cards" id="contactCards"><!-- rendered by script.js --></div>
         </div>
 
         <div class="contact-form-col">
