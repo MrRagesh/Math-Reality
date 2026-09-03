@@ -1596,16 +1596,15 @@ body:not(.no-custom-cursor) textarea{cursor:none;}
   .about-grid-landing,.about-grid{grid-template-columns:1fr;gap:28px;}
   .about-grid-landing .about-media,.about-grid .about-media{order:-1;}
   .about-media{margin-bottom:0;display:flex;flex-direction:column;align-items:stretch;gap:18px;}
-  .about-media-frame-neon{position:static;max-width:380px;width:100%;margin:0 auto;aspect-ratio:auto;min-height:auto;padding:0;}
+  .about-media-frame-neon{position:static;max-width:380px;width:100%;margin:0 auto;aspect-ratio:auto;min-height:auto;padding:0;background:transparent;box-shadow:none;animation:none;overflow:visible;}
+  .about-media-frame-neon::before,.about-media-frame-neon::after{content:none;}
+  .neon-frame-glow,.neon-badge,.neon-ring-scan{display:none;}
   .about-logo{object-fit:contain;object-position:center center;height:auto;max-height:380px;}
   .about-media-copy-neon{padding:0;max-width:560px;margin:0 auto;width:100%;}
   .about-content{text-align:center;}
   .about-cards{max-width:560px;margin:0 auto;}
   .about-list li{text-align:left;}
   .lead-text{margin-left:auto;margin-right:auto;}
-  .neon-badge{padding:6px 10px;font-size:.74rem;}
-  .neon-badge-tl{top:12px;left:12px;}
-  .neon-badge-br{bottom:12px;right:12px;}
   .faculty-card{grid-template-columns:200px 1fr;}
   .faculty-avatar{font-size:2.6rem;}
   .footer-inner{grid-template-columns:1fr 1fr;}
@@ -1632,9 +1631,9 @@ body:not(.no-custom-cursor) textarea{cursor:none;}
   .about-landing-head{margin-bottom:28px;}
   .about-grid-landing,.about-grid{gap:24px;}
   .about-media{gap:16px;}
-  .about-media-frame-neon{max-width:340px;width:100%;margin:0 auto;aspect-ratio:auto;min-height:auto;border-radius:20px;}
-  .about-media-frame-neon::before{border-radius:22px;}
-  .about-media-frame-neon::after{border-radius:18px;}
+  .about-media-frame-neon{max-width:340px;width:100%;margin:0 auto;aspect-ratio:auto;min-height:auto;border-radius:20px;background:transparent;box-shadow:none;animation:none;overflow:visible;}
+  .about-media-frame-neon::before,.about-media-frame-neon::after{content:none;}
+  .neon-frame-glow,.neon-badge,.neon-ring-scan{display:none;}
   .about-logo{max-height:340px;height:auto;object-fit:contain;object-position:center center;}
   .about-media-copy-neon{padding:0;margin:0 auto;}
   .about-media-copy-neon .lead-text{padding:16px 16px;}
@@ -1681,9 +1680,9 @@ body:not(.no-custom-cursor) textarea{cursor:none;}
   .about-landing-inner{padding:0 22px;min-height:auto;justify-content:flex-start;}
   .about-landing-head{margin-bottom:24px;}
   .about-media{margin-bottom:0;display:flex;flex-direction:column;gap:14px;}
-  .about-media-frame-neon{max-width:300px;width:100%;margin:0 auto;aspect-ratio:auto;min-height:auto;border-radius:18px;}
-  .about-media-frame-neon::before{border-radius:20px;}
-  .about-media-frame-neon::after{border-radius:16px;}
+  .about-media-frame-neon{max-width:300px;width:100%;margin:0 auto;aspect-ratio:auto;min-height:auto;border-radius:18px;background:transparent;box-shadow:none;animation:none;overflow:visible;}
+  .about-media-frame-neon::before,.about-media-frame-neon::after{content:none;}
+  .neon-frame-glow,.neon-badge,.neon-ring-scan{display:none;}
   .about-logo{height:auto;max-height:300px;object-fit:contain;object-position:center center;}
   .about-media-copy-neon{padding:0;margin:0 auto;width:100%;}
   .about-media-copy-neon .lead-text{padding:14px 14px;font-size:1rem;line-height:1.55;}
@@ -1768,9 +1767,9 @@ body:not(.no-custom-cursor) textarea{cursor:none;}
   .about-landing-head{margin-bottom:22px;}
   .about-landing-desc{font-size:.95rem;line-height:1.6;}
   .about-media{margin-bottom:0;display:flex;flex-direction:column;gap:12px;}
-  .about-media-frame-neon{max-width:260px;width:100%;margin:0 auto;aspect-ratio:auto;min-height:auto;border-radius:16px;}
-  .about-media-frame-neon::before{border-radius:18px;}
-  .about-media-frame-neon::after{border-radius:14px;}
+  .about-media-frame-neon{max-width:260px;width:100%;margin:0 auto;aspect-ratio:auto;min-height:auto;border-radius:16px;background:transparent;box-shadow:none;animation:none;overflow:visible;}
+  .about-media-frame-neon::before,.about-media-frame-neon::after{content:none;}
+  .neon-frame-glow,.neon-badge,.neon-ring-scan{display:none;}
   .about-logo{height:auto;max-height:260px;object-fit:contain;object-position:center center;}
   .about-media-copy-neon{padding:0;margin:0 auto;width:100%;}
   .about-media-copy-neon .lead-text{padding:12px 13px;font-size:.95rem;line-height:1.6;}
