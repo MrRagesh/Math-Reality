@@ -588,14 +588,14 @@ body:not(.no-custom-cursor) textarea{cursor:none;}
   text-shadow:0 0 2px #ff2a6d, 0 0 2px #ff2a6d, 0 0 2px #ff2a6d;
   animation:redNeonGlow 2s ease-in-out infinite alternate;
 }
-/* @keyframes redNeonGlow{ */
+@keyframes redNeonGlow{
   from{
     text-shadow:0 0 4px #ff2a6d, 0 0 6px #ff2a6d, 0 0 8px #ff2a6d;
   }
   to{
     text-shadow:0 0 10px #ff2a6d, 0 0 20px #ff2a6d, 0 0 30px #ff2a6d, 0 0 40px #ff2a6e39;
   }
-/* } */
+}
 .certificate_id span{font-size:1.2rem;}
 /* ==========================================================================
    HIGHLIGHT CAROUSEL (above faculty)
@@ -708,17 +708,17 @@ body:not(.no-custom-cursor) textarea{cursor:none;}
   background:linear-gradient(100deg,var(--neon-cyan) 0%, var(--neon-magenta) 100%);
   box-shadow:0 0 14px rgba(0,229,255,.55);
 }
-@media (max-width:860px){
+@media (max-width:860px), (max-device-width:860px){
   .carousel-section{padding:0 0 56px;margin-top:-20px;}
   .slider{aspect-ratio:16/9;}
-  .slide-caption{display:none;}
+  .slide-caption{display:none !important;}
   .slider-btn{width:44px;height:44px;font-size:1.8rem;}
   .slider-btn-prev{left:16px;}
   .slider-btn-next{right:16px;}
   .slider-dots{bottom:18px;}
 }
-@media (max-width:420px){
-  .slide-caption{display:none;}
+@media (max-width:420px), (max-device-width:420px){
+  .slide-caption{display:none !important;}
   .slide-tag{font-size:.68rem;padding:7px 12px;margin-bottom:12px;}
 }
 /* ==========================================================================
@@ -1089,14 +1089,14 @@ body:not(.no-custom-cursor) textarea{cursor:none;}
 @keyframes lbZoomIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
 .lightbox body,body.lb-open{overflow:hidden;}
 
-@media (max-width:680px){
+@media (max-width:680px), (max-device-width:680px){
   .lightbox{padding:14px;}
   .lightbox-stage{max-width:96vw;max-height:92vh;gap:10px;}
   .lightbox-image{max-height:74vh;border-radius:14px;}
   .lightbox-close{top:12px;right:12px;width:40px;height:40px;font-size:1.5rem;}
   .lightbox-caption{font-size:.85rem;}
 }
-@media (max-width:420px){
+@media (max-width:420px), (max-device-width:420px){
   .lightbox{padding:10px;}
   .lightbox-close{top:10px;right:10px;width:36px;height:36px;}
 }
@@ -1578,8 +1578,11 @@ body:not(.no-custom-cursor) textarea{cursor:none;}
 
 /* ==========================================================================
    RESPONSIVE
+   Defense-in-depth: every breakpoint fires on BOTH viewport (max-width)
+   AND hardware pixels (max-device-width) so "Request Desktop Site" or
+   browser zoom can never accidentally fall back to desktop-only layout.
    ========================================================================== */
-@media (max-width:1080px){
+@media (max-width:1080px), (max-device-width:1080px){
   .about-landing{min-height:auto;padding:calc(var(--nav-h) + 28px) 0 56px;}
   .about-landing-inner{min-height:auto;justify-content:flex-start;padding:0 20px;}
   .about-landing-head{text-align:center;margin-bottom:32px;}
@@ -1613,7 +1616,7 @@ body:not(.no-custom-cursor) textarea{cursor:none;}
   .testi-next{right:-4px;}
 }
 
-@media (max-width:860px){
+@media (max-width:860px), (max-device-width:860px){
   .nav-links,.btn-nav-cta{display:none;}
   .hamburger{display:flex;}
   .nav{
@@ -1667,7 +1670,7 @@ body:not(.no-custom-cursor) textarea{cursor:none;}
   .contact-map{margin-top:14px;min-height:260px;aspect-ratio:16/10;}
 }
 
-@media (max-width:680px){
+@media (max-width:680px), (max-device-width:680px){
   .nav{padding:7px 8px 7px 14px;justify-content:space-between;align-items:center;gap:0;}
   .nav-wrap{padding:10px 10px 0;}
   .hamburger{width:38px;height:38px;gap:4.5px;}
@@ -1745,7 +1748,7 @@ body:not(.no-custom-cursor) textarea{cursor:none;}
   .testi-next{right:6px;}
 }
 
-@media (max-width:420px){
+@media (max-width:420px), (max-device-width:420px){
   .about-landing-title{font-size:36px;}
   .nav-wrap{padding:8px 8px 0;}
   .nav{
