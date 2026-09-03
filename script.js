@@ -18,7 +18,7 @@ const FACULTY = [
     bio: "Dr. P. G. Jansi Rani is the founder of the Mathematics Reality Lab and a Professor of Mathematics with over 18 years of experience bridging theoretical mathematics and real-world application. Her research focuses on applied analysis, mathematical modelling, and experimental pedagogy — turning theorems into working experiments that students can build, test, and hold in their hands.",
     vision: "A classroom where every equation has a corresponding experiment, every student is a builder, and mathematics is experienced, not just memorized — preparing a generation of thinkers who see the world through the lens of its mathematical structure.",
     email: "pgjansirani@gmail.com",
-    phone: "+91 98765 43210"
+    phone: "+91 96883 32441"
   },
   
 ];
@@ -274,9 +274,17 @@ const FAQ = [
   }
 ];
 
+// EmailJS — plug in your keys from the EmailJS dashboard.
+// Template to paste into the EmailJS "Create template" editor is provided below the form handler.
+const EMAILJS_CONFIG = {
+  publicKey: "lVXm529fvgeT0RUWR",      // Public Key (top-left of https://dashboard.emailjs.com/)
+  serviceId: "service_0enr4x3",        // Service ID  (Add Service → Gmail → Name + Connect → Copy ID)
+  templateId: "template_0irjicm"       // Template ID (Email Templates → Create new template → ... menu → Copy ID)
+};
+
 // Contact — only filled fields are rendered; leave blank to omit.
 const CONTACT_INFO = {
-  email: "pgjansirani@gmail.com",
+  email: "mathrealitylab@gmail.com",
   phone: "+91 96883 32441",
   address: "",
   whatsapp: "+91 96883 32441",
@@ -284,7 +292,7 @@ const CONTACT_INFO = {
   linkedin: "Mathematics Reality Lab",
   // linkedinUrl: "https://linkedin.com/company/math-reality-lab",
   availability: "Currently accepting collaborations & student projects",
-  mapEmbedUrl: "" // add a Google Maps embed URL to replace the map placeholder
+  mapEmbedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4273.098192767815!2d78.77937333856808!3d10.995105498257743!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3baafa4dba7966a5%3A0xf4d17ef98c87e33!2sMAM%20COLLEGE%20OF%20ENGINEERING%20AND%20TECHNOLOGY!5e1!3m2!1sen!2sin!4v1788407307795!5m2!1sen!2sin"
 };
 
 
@@ -678,7 +686,7 @@ function renderContact(){
 
   if (CONTACT_INFO.mapEmbedUrl) {
     const mapFrame = document.getElementById("mapFrame");
-    if (mapFrame) mapFrame.innerHTML = `<iframe src="${CONTACT_INFO.mapEmbedUrl}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="MRL location map"></iframe>`;
+    if (mapFrame) mapFrame.innerHTML = `<iframe src="${CONTACT_INFO.mapEmbedUrl}" style="border:0;width:100%;height:100%;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" title="MRL location map — MAM College of Engineering and Technology"></iframe>`;
   }
 }
 
@@ -867,12 +875,44 @@ function initTestimonials(){
 
 
 /* ---------------------------------------------------------------------- *
- * 9. CONTACT FORM VALIDATION
+ * 9. CONTACT FORM — EmailJS send + parallel WhatsApp handoff
  * ---------------------------------------------------------------------- */
+
+function buildWhatsAppText(payload){
+  const lines = [
+    `*New MRL Website Enquiry*`,
+    ``,
+    `*Name:* ${payload.name}`,
+    `*Email:* ${payload.email}`
+  ];
+  if (payload.phone) lines.push(`*Phone:* ${payload.phone}`);
+  if (payload.organization) lines.push(`*Organization:* ${payload.organization}`);
+  lines.push(`*Subject:* ${payload.subject}`);
+  lines.push(``);
+  lines.push(`*Message:*`);
+  lines.push(payload.message);
+  return lines.join("\n");
+}
+
+function cleanWhatsAppNumber(raw){
+  if (!raw) return "";
+  return String(raw).replace(/[^\d]/g, "").replace(/^0+/, "");
+}
+
+function openWhatsAppWithForm(payload){
+  const baseNumber = cleanWhatsAppNumber(
+    CONTACT_INFO.whatsapp || (CONTACT_INFO.whatsappUrl || "").replace(/^https?:\/\/wa\.me\//, "")
+  );
+  if (!baseNumber) return null;
+
+  const url = "https://wa.me/" + baseNumber + "?text=" + encodeURIComponent(buildWhatsAppText(payload));
+  return window.open(url, "_blank", "noopener");
+}
 
 function initContactForm(){
   const form = document.getElementById("contactForm");
   const note = document.getElementById("formNote");
+  const btnText = document.getElementById("submitBtnText");
   if (!form) return;
 
   const rules = {
@@ -882,6 +922,37 @@ function initContactForm(){
     subject: v => v.trim().length >= 3 || "Please enter a subject.",
     message: v => v.trim().length >= 10 || "Please enter a message (10+ characters)."
   };
+
+  function payloadFromForm(){
+    const now = new Date();
+    return {
+      // —— Plain template placeholders (match the EmailJS visual editor) ——
+      //    NOTE: EmailJS uses {{double curly braces}} syntax; these keys
+      //    below directly correspond to the {{name}} / {{title}} / etc.
+      //    placeholders used in the template's plain Content editor.
+      name:         form.elements.name.value.trim(),
+      email:        form.elements.email.value.trim(),
+      phone:        (form.elements.phone.value || "").trim(),
+      organization: (form.elements.organization.value || "").trim(),
+      title:        form.elements.subject.value.trim(),
+      subject:      form.elements.subject.value.trim(),
+      message:      form.elements.message.value.trim(),
+      time:         now.toLocaleString(),
+      date:         now.toLocaleDateString(),
+
+      // —— EmailJS template fields (human-readable copies, safe to use
+      //    alongside the above short aliases) ——
+      to_email:     CONTACT_INFO.email || "",
+      to_name:      "MRL Team",
+      from_name:    form.elements.name.value.trim(),
+      reply_to:     form.elements.email.value.trim(),
+      user_phone:   (form.elements.phone.value || "").trim(),
+      user_org:     (form.elements.organization.value || "").trim(),
+      enquiry_subject: form.elements.subject.value.trim(),
+      enquiry_message: form.elements.message.value.trim(),
+      submitted_at: now.toLocaleString()
+    };
+  }
 
   function validateField(field){
     const input = form.elements[field];
@@ -905,7 +976,28 @@ function initContactForm(){
     if (input) input.addEventListener("blur", () => validateField(field));
   });
 
-  form.addEventListener("submit", (e) => {
+  function setBusy(busy, label){
+    if (!btnText) return;
+    if (busy) {
+      btnText.dataset.original = btnText.textContent;
+      btnText.textContent = label || "Sending…";
+      form.setAttribute("aria-busy", "true");
+    } else {
+      btnText.textContent = btnText.dataset.original || btnText.textContent;
+      form.removeAttribute("aria-busy");
+    }
+  }
+
+  function emailjsConfigReady(){
+    return Boolean(
+      window.emailjs &&
+      EMAILJS_CONFIG.publicKey &&
+      EMAILJS_CONFIG.serviceId &&
+      EMAILJS_CONFIG.templateId
+    );
+  }
+
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const validations = Object.keys(rules).map(validateField);
     const allValid = validations.every(Boolean);
@@ -916,13 +1008,183 @@ function initContactForm(){
       return;
     }
 
-    // No backend is connected yet — this confirms the form works client-side.
-    // Wire this up to your email service / API endpoint of choice.
-    note.textContent = "Thanks — your message looks good and is ready to send. Connect this form to your email service or backend to complete delivery.";
-    note.classList.add("success");
-    form.reset();
+    const payload = payloadFromForm();
+    setBusy(true, "Sending…");
+    note.classList.remove("success");
+    note.textContent = "";
+
+    let emailSent = false;
+    let emailError = "";
+    let waOpened = null;
+
+    // 1) Email — via EmailJS (if configured)
+    if (emailjsConfigReady()) {
+      try {
+        if (!window.emailjs._initialized) {
+          window.emailjs.init({ publicKey: EMAILJS_CONFIG.publicKey });
+          window.emailjs._initialized = true;
+        }
+        const params = { ...payload };
+        await window.emailjs.send(
+          EMAILJS_CONFIG.serviceId,
+          EMAILJS_CONFIG.templateId,
+          params,
+          { publicKey: EMAILJS_CONFIG.publicKey }
+        );
+        emailSent = true;
+      } catch (err) {
+        console.error("EmailJS send failed:", err);
+        emailError = (err && err.text) || (err && err.message) || String(err);
+        emailSent = false;
+      }
+    } else {
+      emailError = "EmailJS is not configured yet. Open script.js and fill EMAILJS_CONFIG.";
+      emailSent = false;
+    }
+
+    // 2) WhatsApp — parallel handoff. Opens MRL's WhatsApp chat with the
+    //    same enquiry details filled as the start message. The user can
+    //    then tap SEND from WhatsApp; we never post anything on their behalf.
+    try {
+      waOpened = openWhatsAppWithForm(payload);
+    } catch (err) {
+      console.warn("WhatsApp handoff failed:", err);
+      waOpened = null;
+    }
+
+    setBusy(false);
+
+    if (emailSent) {
+      let msg = "Message sent — check *mathrealitylab@gmail.com* for the enquiry.";
+      if (waOpened) msg += " A WhatsApp chat draft also opened in a new tab.";
+      else if (CONTACT_INFO.whatsappUrl) msg += " Tip: click the WhatsApp card in the contact section to open a chat.";
+      note.textContent = msg;
+      note.classList.add("success");
+      form.reset();
+      return;
+    }
+
+    // Email not delivered — still surface success via WhatsApp if possible.
+    if (waOpened) {
+      note.textContent = "Email send skipped, but a WhatsApp draft opened in a new tab with all your details. Tap SEND in WhatsApp to deliver the message.";
+      note.classList.add("success");
+      form.reset();
+      return;
+    }
+
+    // Neither worked: show the underlying reason so user can fix config.
+    note.textContent =
+      "Couldn't deliver the message. " +
+      (emailError ? ` Reason: ${emailError}` : "") +
+      (CONTACT_INFO.whatsappUrl
+        ? ` As a fallback, click the WhatsApp card on the left (or email ${CONTACT_INFO.email}) and paste your enquiry there.`
+        : ` Please email ${CONTACT_INFO.email} directly.`);
+    note.classList.remove("success");
   });
 }
+
+/* ======================================================================== *
+ * EMAILJS TEMPLATE — copy everything between the two === lines into
+ * https://dashboard.emailjs.com/admin/templates → Create new template.
+ *
+ * SETTINGS (left sidebar of the EmailJS template editor):
+ *   Template name      : MRL Website Enquiry
+ *   Subject line       : MRL Website — New Enquiry from {{from_name}}
+ *   From name          : MRL Website
+ *   From email         : {{reply_to}}          (IMPORTANT — so replies go to the enquirer)
+ *   Reply-to           : {{reply_to}}
+ *   To email           : mathrealitylab@gmail.com   (type this exactly in the "To" box)
+ *
+ * HTML BODY (click the </> icon to enable HTML source, then paste this):
+ * ========================================================================
+<div style="font-family:'Inter','Segoe UI',Helvetica,Arial,sans-serif; background:#f6f8ff; padding:32px 18px; color:#0f172a;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width:680px; margin:0 auto; background:#ffffff; border-radius:18px; overflow:hidden; border:1px solid rgba(139,91,255,0.22); box-shadow:0 24px 60px rgba(139,91,255,0.12), 0 0 0 1px rgba(0,229,255,0.18) inset;">
+    <tr>
+      <td style="padding:28px 34px 22px; background:linear-gradient(120deg,#00e5ff 0%,#2f5fff 45%,#8b5bff 100%); color:#ffffff;">
+        <div style="font-family:'Space Grotesk',Inter,Arial,sans-serif; font-size:13px; letter-spacing:.18em; text-transform:uppercase; opacity:.92;">Mathematics Reality Lab</div>
+        <h1 style="margin:6px 0 6px; font-family:'Space Grotesk',Inter,Arial,sans-serif; font-size:28px; line-height:1.15; color:#ffffff;">New Enquiry from {{from_name}}</h1>
+        <p style="margin:0; font-size:14px; opacity:.96;">Submitted at {{submitted_at}}</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:28px 34px 10px;">
+        <h2 style="margin:0 0 10px; font-family:'Space Grotesk',Inter,Arial,sans-serif; font-size:18px; color:#0f172a;">{{enquiry_subject}}</h2>
+        <div style="background:linear-gradient(135deg, rgba(0,229,255,0.10), rgba(139,91,255,0.10)); border:1px solid rgba(0,229,255,0.22); border-radius:14px; padding:18px 20px; font-size:15px; line-height:1.65; color:#0f172a; white-space:pre-wrap;">{{enquiry_message}}</div>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:14px 34px 6px;">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+          <tr>
+            <td colspan="2" style="padding:14px 0 10px; font-family:'Space Grotesk',Inter,Arial,sans-serif; font-size:14px; letter-spacing:.12em; text-transform:uppercase; color:#8b5bff;">Sender Details</td>
+          </tr>
+          <tr>
+            <td style="width:140px; padding:10px 0; font-size:13px; color:#64748b; vertical-align:top;">Full Name</td>
+            <td style="padding:10px 0; font-size:15px; color:#0f172a;"><strong>{{from_name}}</strong></td>
+          </tr>
+          <tr>
+            <td style="padding:10px 0; font-size:13px; color:#64748b; vertical-align:top;">Email</td>
+            <td style="padding:10px 0; font-size:15px; color:#0f172a;"><a href="mailto:{{reply_to}}" style="color:#2f5fff; text-decoration:underline;">{{reply_to}}</a></td>
+          </tr>
+          <tr>
+            <td style="padding:10px 0; font-size:13px; color:#64748b; vertical-align:top;">Phone</td>
+            <td style="padding:10px 0; font-size:15px; color:#0f172a;">{{user_phone}}{{^user_phone}}<span style="color:#94a3b8;">— not provided —</span>{{/user_phone}}</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 0; font-size:13px; color:#64748b; vertical-align:top;">Organization / Company</td>
+            <td style="padding:10px 0; font-size:15px; color:#0f172a;">{{user_org}}{{^user_org}}<span style="color:#94a3b8;">— not provided —</span>{{/user_org}}</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 0; font-size:13px; color:#64748b; vertical-align:top;">Enquiry Subject</td>
+            <td style="padding:10px 0; font-size:15px; color:#0f172a;"><strong>{{enquiry_subject}}</strong></td>
+          </tr>
+          <tr>
+            <td style="padding:10px 0; font-size:13px; color:#64748b; vertical-align:top;">Delivered To</td>
+            <td style="padding:10px 0; font-size:15px; color:#0f172a;">{{to_email}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:22px 34px 32px;">
+        <div style="border-top:1px dashed rgba(139,91,255,0.35); padding-top:18px; font-size:12px; line-height:1.6; color:#64748b;">
+          Tip — reply to this email directly. The <strong>From</strong> and <strong>Reply-To</strong> are set to <em>{{reply_to}}</em>, so your reply lands in the enquirer's inbox.
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+ * ========================================================================
+ *
+ * AUTO-REPLY TEMPLATE (optional, 2nd template, set it as auto-reply from
+ *                      the *Auto-responders* tab after saving the above):
+ *   Subject  : Thanks for reaching out to Mathematics Reality Lab
+ *   To email : {{reply_to}}
+ *   Body (HTML mode) — paste this:
+ * ------------------------------------------------------------------------
+<div style="font-family:'Inter','Segoe UI',Helvetica,Arial,sans-serif; background:#f6f8ff; padding:28px 16px;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width:620px; margin:0 auto; background:#ffffff; border-radius:18px; overflow:hidden; border:1px solid rgba(0,229,255,0.22); box-shadow:0 22px 56px rgba(0,229,255,0.12);">
+    <tr><td style="padding:26px 30px 22px; background:linear-gradient(120deg,#00e5ff 0%,#2f5fff 55%,#ff3dc6 100%); color:#ffffff;">
+      <div style="font-family:'Space Grotesk',Inter,Arial,sans-serif; font-size:13px; letter-spacing:.18em; text-transform:uppercase; opacity:.94;">Mathematics Reality Lab</div>
+      <h1 style="margin:6px 0 0; font-family:'Space Grotesk',Inter,Arial,sans-serif; font-size:26px;">Thanks, {{from_name}} 👋</h1>
+    </td></tr>
+    <tr><td style="padding:26px 30px 10px; font-size:15px; line-height:1.7; color:#0f172a;">
+      We've received your message about <strong>{{enquiry_subject}}</strong>. A member of the MRL team will reply to <em>{{reply_to}}</em> within 2–3 working days.
+      <br><br>
+      <strong>Summary of your message:</strong>
+      <div style="background:linear-gradient(135deg, rgba(0,229,255,0.10), rgba(255,61,198,0.10)); border:1px solid rgba(0,229,255,0.25); border-radius:14px; padding:16px 18px; margin-top:12px; white-space:pre-wrap; font-size:14px; line-height:1.6;">{{enquiry_message}}</div>
+    </td></tr>
+    <tr><td style="padding:14px 30px 28px; font-size:14px; color:#0f172a;">
+      <div style="border-top:1px dashed rgba(139,91,255,0.35); padding-top:16px;">
+        — The MRL Team &middot; <a href="mailto:mathrealitylab@gmail.com" style="color:#2f5fff;">mathrealitylab@gmail.com</a>
+      </div>
+    </td></tr>
+  </table>
+</div>
+ * ------------------------------------------------------------------------
+ * END OF EMAILJS TEMPLATES
+ * ========================================================================
+ */
 
 
 /* ---------------------------------------------------------------------- *
