@@ -41,9 +41,9 @@ const SLIDES = [
     pattern: "fourier"
   },
   {
-    tag: "Student Workspace",
-    title: "Workbenches, circuits, sensors, and data — connected to the math.",
-    subtitle: "The lab is structured for Evocation Technique and Mind Mapping, giving students the tools and safety to explore before they are told the answer.",
+    tag: "Student Project Exhibition",
+    title: "Hands-On Mathematical Experiments: Applying Math to Real-World Engineering.",
+    subtitle: "Discover how mathematical concepts work beyond the classroom.Apply hands-on experiments to solve real-world engineering challenges.",
     src: "./asset/img_slide/c3.webp",
     pattern: "graph"
   },
