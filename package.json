@@ -1,0 +1,21 @@
+{
+  "name": "mathematics-reality-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mathematics Reality Lab (MRL) official production website",
+  "scripts": {
+    "build": "node build.js",
+    "test": "node test.js",
+    "lint": "node lint.js",
+    "check": "node lint.js && node test.js && node build.js"
+  },
+  "keywords": [
+    "mathematics",
+    "engineering",
+    "stem",
+    "applied-math",
+    "education"
+  ],
+  "author": "Mathematics Reality Lab",
+  "license": "UNLICENSED"
+}

@@ -6,6 +6,27 @@
    ========================================================================== */
 
 /* ---------------------------------------------------------------------- *
+ * 0. SEO — SINGLE SOURCE OF TRUTH FOR PUBLIC ORIGIN
+ *    Change SITE_URL below to mathrealitylab.in / mathrealitylab.com when
+ *    you switch the production domain. All SEO URLs (canonical, OG,
+ *    JSON-LD @id/url, sitemap <loc>, robots Sitemap) are derived from
+ *    this single value. Also keep the matching copy in index.html
+ *    <head> inline script in sync so crawlers read one canonical origin.
+ * ---------------------------------------------------------------------- */
+const SITE_URL = "https://mathrealitylab.vercel.app/";
+
+window.__SEO__ = window.__SEO__ || {};
+window.__SEO__.SITE_URL = SITE_URL;
+
+function joinUrl(base, path){
+  const b = String(base || "/").replace(/\/?$/, "/");
+  if (!path) return b;
+  if (/^https?:\/\//i.test(path)) return path;
+  return b + String(path).replace(/^\/+/, "");
+}
+window.__SEO__.abs = function(path){ return joinUrl(SITE_URL, path); };
+
+/* ---------------------------------------------------------------------- *
  * 1. EDITABLE CONTENT
  * ---------------------------------------------------------------------- */
 
@@ -43,7 +64,7 @@ const SLIDES = [
   {
     tag: "Student Project Exhibition",
     title: "Hands-On Mathematical Experiments: Applying Math to Real-World Engineering.",
-    subtitle: "Discover how mathematical concepts work beyond the classroom.Apply hands-on experiments to solve real-world engineering challenges.",
+    subtitle: "Discover how mathematical concepts work beyond the classroom. Apply hands-on experiments to solve real-world engineering challenges.",
     src: "./asset/img_slide/c3.webp",
     pattern: "graph"
   },
@@ -65,7 +86,7 @@ const PROJECTS = [
     application: "Polar Planimeter",
     description: "Uses Green's Theorem to measure the area of irregular, curved shapes with a mechanical polar planimeter — turning a line integral into a physical reading.",
     pattern: "integral",
-    image: "asset/project/Picture1.png"
+    image: "asset/project/Picture1.webp"
   },
   {
     title: "Street-Light Pole Stability",
@@ -73,7 +94,7 @@ const PROJECTS = [
     application: "Equilibrium of Forces",
     description: "Applies vector equilibrium analysis to model the forces acting on a street-light pole, demonstrating how vector calculus governs structural balance.",
     pattern: "vector",
-    image: "asset/project/Picture2.png"
+    image: "asset/project/Picture2.webp"
   },
   {
     title: "3D Hologram Representation",
@@ -81,7 +102,7 @@ const PROJECTS = [
     application: "Holographic Projection",
     description: "Uses Euler's theorem for complex numbers to construct a rotating 3D hologram, connecting complex-plane rotation to visual projection.",
     pattern: "complex",
-    image: "asset/project/Picture3.png"
+    image: "asset/project/Picture3.webp"
   },
   {
     title: "RLC Circuit Analysis",
@@ -89,7 +110,7 @@ const PROJECTS = [
     application: "RLC Circuit",
     description: "Models the transient and steady-state response of an RLC circuit using differential equations solved via the Laplace transform.",
     pattern: "circuit",
-    image: "asset/project/Picture4.png"
+    image: "asset/project/Picture4.webp"
   },
   {
     title: "GPS Tracking",
@@ -97,7 +118,7 @@ const PROJECTS = [
     application: "GPS Positioning",
     description: "Demonstrates how trilateration — measuring distances from known reference points — is used to pinpoint a location, the same principle behind GPS.",
     pattern: "trilateration",
-    image: "asset/project/Picture5.png"
+    image: "asset/project/Picture5.webp"
   },
   {
     title: "Material Science Modeling",
@@ -105,7 +126,7 @@ const PROJECTS = [
     application: "Material Science",
     description: "Applies multivariable differential calculus to study how material properties change across multiple interacting variables.",
     pattern: "surface",
-    image: "asset/project/Picture6.png"
+    image: "asset/project/Picture6.webp"
   },
   {
     title: "Maximum-Volume Water Tank",
@@ -113,7 +134,7 @@ const PROJECTS = [
     application: "Rectangular Water Tank Design",
     description: "Uses Lagrange multipliers to determine the dimensions of a rectangular water tank that maximize volume under given material constraints.",
     pattern: "lagrange",
-    image: "asset/project/Picture7.png"
+    image: "asset/project/Picture7.webp"
   },
   {
     title: "Pick and Place Robot",
@@ -121,7 +142,7 @@ const PROJECTS = [
     application: "Robotic Arm Positioning",
     description: "Applies coordinate geometry to compute precise pick-and-place coordinates for a robotic arm operating in a defined workspace.",
     pattern: "coordinate",
-    image: "asset/project/Picture8.png"
+    image: "asset/project/Picture8.webp"
   },
   {
     title: "Laser Beam Design",
@@ -129,7 +150,7 @@ const PROJECTS = [
     application: "Laser Optics",
     description: "Uses linear and non-linear transformations to model how a laser beam's path and shape change through an optical system.",
     pattern: "transform",
-    image: "asset/project/Picture9.png"
+    image: "asset/project/Picture9.webp"
   },
   {
     title: "Basketball Trajectory",
@@ -137,7 +158,7 @@ const PROJECTS = [
     application: "Projectile Motion",
     description: "Models the parabolic path of a basketball shot using quadratic equations, connecting algebra to real sports mechanics.",
     pattern: "parabola",
-    image: "asset/project/Picture10.png"
+    image: "asset/project/Picture10.webp"
   },
   {
     title: "Height of a Building",
@@ -145,7 +166,7 @@ const PROJECTS = [
     application: "Elevation Measurement",
     description: "Uses angle-of-elevation trigonometry to calculate the height of a building without direct measurement.",
     pattern: "trig",
-    image: "asset/project/Picture11.png"
+    image: "asset/project/Picture11.webp"
   },
   {
     title: "ECG / EEG Signal Processing",
@@ -153,7 +174,7 @@ const PROJECTS = [
     application: "Biomedical Signal Processing",
     description: "Applies Fourier analysis to decompose ECG and EEG signals into frequency components for cleaner biomedical signal interpretation.",
     pattern: "fourier",
-    image: "asset/project/Picture12.png"
+    image: "asset/project/Picture12.webp"
   },
   {
     title: "Logic Gate Circuit Model",
@@ -161,7 +182,7 @@ const PROJECTS = [
     application: "Digital Logic Circuits",
     description: "Uses Boolean algebra and discrete mathematics to design and simulate a working logic-gate circuit model.",
     pattern: "logic",
-    image: "asset/project/Picture13.png"
+    image: "asset/project/Picture13.webp"
   },
   {
     title: "Image Processing",
@@ -177,7 +198,7 @@ const PROJECTS = [
     application: "System Stability / Principal Directions",
     description: "Explores how eigenvalues and eigenvectors reveal the natural directions and stability behaviour of a physical or dynamic system.",
     pattern: "eigen",
-    image: "asset/project/Picture15.png"
+    image: "asset/project/Picture15.webp"
   }
 ];
 
@@ -187,24 +208,24 @@ const GALLERY = [
   { title: "Lab Session", desc: "Students collaborating on hands-on math experiments", image: "./asset/img1.webp" },
   { title: "Prototype Build", desc: "Team assembling a mechanical planimeter from scratch", image: "./asset/img2.webp" },
   { title: "Student Demonstration", desc: "Undergrad presenting their 3D hologram project", image: "./asset/img3.webp" },
-  { title: "Circuit Testing", desc: "Troubleshooting an RLC circuit with multimeter readings", image: "./asset/img4.webp"},
+  { title: "Circuit Testing", desc: "Troubleshooting an RLC circuit with multimeter readings", image: "./asset/img4.webp" },
   { title: "Field Measurement", desc: "Using trigonometry to calculate local building heights", image: "./asset/img5.webp" },
   { title: "Data Review", desc: "Analyzing ECG signal processing results from lab tests", image: "./asset/img6.webp" },
   { title: "Design Discussion", desc: "Brainstorming new Lagrange multiplier tank prototypes", image: "./asset/img7.webp" },
-  { title: "Model Presentation", desc: "Presenting the final model to the client", image: "asset/project/Picture8.png" },
-  { title: "Robotics Trial", desc: "Brainstorming new Lagrange multiplier tank prototypes", image: "./asset/project/Picture9.png" },
+  { title: "Robotic Arm Coordinate Demo", desc: "Mapping pick-and-place positions with coordinate geometry on the lab workbench", image: "asset/project/Picture8.webp" },
+  { title: "Laser Optics Transform Model", desc: "Modeling laser beam paths with linear and non-linear transformations", image: "./asset/project/Picture9.webp" },
 ];
 
 // Videos — set youtubeId to a real (can be unlisted) YouTube video ID to enable playback.
 const VIDEOS = [
   { 
     title: "How to prepare a tea using Mathematics?", 
-    desc: "Lets Makes Engineering brings out the experiment to prepare tea using solar Heater. Well, you don't have a solar heater, don't worry, the video also has an answer for it.", 
+    desc: "Let's Make Engineering presents an experiment to prepare tea using a solar heater — and shows an accessible alternative if you don't have one.", 
     category: "Overview", 
     youtubeId: "OEkEsP61QNk" 
   },
   { 
-    title: "How School Maths Help to remove Kidney Stone?", 
+    title: "How School Maths Helps to Remove Kidney Stones", 
     desc: "Explores how basic mathematical principles help solve the real-world problem of removing kidney stones, turning classroom theory into a practical life-saving application.",
     category: "Experiment", 
     youtubeId: "wcPhdQ7VUVI" 
@@ -388,8 +409,8 @@ function renderFaculty(){
         <p class="faculty-desc">${f.bio}</p>
         ${f.vision ? `<p class="faculty-desc"><strong>Vision:</strong> ${f.vision}</p>` : ""}
         <div class="faculty-meta">
-          ${f.email ? `<a href="mailto:${f.email}">✉ ${f.email}</a>` : ""}
-          ${f.phone ? `<span>☎ ${f.phone}</span>` : ""}
+          ${f.email ? `<a href="mailto:${f.email}" aria-label="Email ${f.name}">✉ ${f.email}</a>` : ""}
+          ${f.phone ? `<a href="tel:${f.phone.replace(/[^\d+]/g, '')}" aria-label="Call ${f.name}">☎ ${f.phone}</a>` : ""}
         </div>
       </div>
     </div>
@@ -401,7 +422,7 @@ function renderProjects(){
   el.innerHTML = PROJECTS.map((p, i) => `
     <article class="project-card reveal reveal-delay-${(i % 3) + 1}">
       <div class="project-media">
-        ${p.image ? `<img src="${p.image}" alt="${p.title}" loading="lazy">` : mathSvg(p.pattern, i)}
+        ${p.image ? `<img src="${p.image}" alt="${p.title} — ${p.concept} applied-mathematics experiment at Mathematics Reality Lab" loading="lazy" decoding="async">` : mathSvg(p.pattern, i)}
         <span class="project-index mono">0${i + 1 < 10 ? i + 1 : i + 1}</span>
       </div>
       <div class="project-body">
@@ -419,8 +440,8 @@ function renderProjects(){
 function renderGallery(){
   const el = document.getElementById("galleryGrid");
   el.innerHTML = GALLERY.map((g, i) => `
-    <div class="gallery-card reveal reveal-delay-${(i % 3) + 1}" data-title="${g.title}" data-desc="${g.desc}" data-index="${i}">
-      ${g.image ? `<img src="${g.image}" alt="${g.title}" loading="lazy">` : mathSvg(g.pattern, i)}
+    <div class="gallery-card reveal reveal-delay-${(i % 3) + 1}" role="button" tabindex="0" aria-label="View ${g.title}: ${g.desc}" data-title="${g.title}" data-desc="${g.desc}" data-index="${i}">
+      ${g.image ? `<img src="${g.image}" alt="${g.title}: ${g.desc}" loading="lazy" decoding="async">` : mathSvg(g.pattern, i)}
       <div class="gallery-overlay">
         <span class="gallery-overlay-title">${g.title}</span>
         <span class="gallery-overlay-desc">${g.desc}</span>
@@ -447,7 +468,7 @@ function renderSlider(){
   track.innerHTML = SLIDES.map((s, i) => `
     <div class="slide ${i === 0 ? "is-active" : ""}" data-slide="${i}">
       ${s.src
-        ? `<img class="slide-img" src="${s.src}" alt="${s.title}" loading="${i === 0 ? "eager" : "lazy"}">`
+        ? `<img class="slide-img" src="${s.src}" alt="${s.title} — ${s.tag || "MRL lab highlight"}" loading="${i === 0 ? "eager" : "lazy"}" decoding="${i === 0 ? "async" : "async"}">`
         : `<div class="slide-img" style="display:block;">${mathSvg(s.pattern || "wave", i).replace('<svg', '<svg style="width:100%;height:100%;display:block;"')}</div>`
       }
       <div class="slide-caption">
@@ -460,7 +481,7 @@ function renderSlider(){
 
   // Build dots
   dotsWrap.innerHTML = SLIDES.map((_, i) =>
-    `<button class="slider-dot ${i === 0 ? "is-active" : ""}" role="tab" aria-label="Go to slide ${i + 1}" data-i="${i}"></button>`
+    `<button class="slider-dot ${i === 0 ? "is-active" : ""}" role="tab" aria-selected="${i === 0 ? "true" : "false"}" aria-label="Go to slide ${i + 1}" data-i="${i}"></button>`
   ).join("");
 
   const go = (idx, fromUser = false) => {
@@ -468,7 +489,10 @@ function renderSlider(){
     current = idx;
     track.style.transform = `translateX(-${current * 100}%)`;
     [...track.children].forEach((el, i) => el.classList.toggle("is-active", i === current));
-    [...dotsWrap.children].forEach((el, i) => el.classList.toggle("is-active", i === current));
+    [...dotsWrap.children].forEach((el, i) => {
+      el.classList.toggle("is-active", i === current);
+      el.setAttribute("aria-selected", String(i === current));
+    });
     if (fromUser) restart();
   };
 
@@ -521,13 +545,17 @@ function initGalleryLightbox(){
   const grid = document.getElementById("galleryGrid");
   if (!lb || !lbImg || !lbCap || !lbClose || !grid) return;
 
+  let lastActiveElement = null;
+
   const open = (src, title, desc) => {
+    lastActiveElement = document.activeElement;
     lbImg.src = src;
     lbImg.alt = title || "";
     lbCap.innerHTML = `<strong>${title || ""}</strong>${desc && desc !== title ? `<span>${desc}</span>` : ""}`;
     lb.classList.add("open");
     lb.setAttribute("aria-hidden", "false");
     document.body.classList.add("lb-open");
+    lbClose.focus();
   };
 
   const close = () => {
@@ -535,10 +563,12 @@ function initGalleryLightbox(){
     lb.setAttribute("aria-hidden", "true");
     document.body.classList.remove("lb-open");
     setTimeout(() => { lbImg.src = ""; lbCap.innerHTML = ""; }, 220);
+    if (lastActiveElement && typeof lastActiveElement.focus === "function") {
+      lastActiveElement.focus();
+    }
   };
 
-  grid.addEventListener("click", (e) => {
-    const card = e.target.closest(".gallery-card");
+  const handleCardTrigger = (card) => {
     if (!card) return;
     const idx = Number(card.dataset.index);
     const entry = GALLERY[idx];
@@ -553,6 +583,21 @@ function initGalleryLightbox(){
         const svgStr = new XMLSerializer().serializeToString(clone);
         const dataUrl = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgStr);
         open(dataUrl, entry.title, entry.desc);
+      }
+    }
+  };
+
+  grid.addEventListener("click", (e) => {
+    const card = e.target.closest(".gallery-card");
+    handleCardTrigger(card);
+  });
+
+  grid.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      const card = e.target.closest(".gallery-card");
+      if (card) {
+        e.preventDefault();
+        handleCardTrigger(card);
       }
     }
   });
@@ -703,6 +748,8 @@ function initCursor(){
   }
 
   const cursor = document.getElementById("sparkCursor");
+  if (!cursor) return;
+
   let mouseX = window.innerWidth / 2, mouseY = window.innerHeight / 2;
   let curX = mouseX, curY = mouseY;
 
@@ -906,13 +953,14 @@ function openWhatsAppWithForm(payload){
   if (!baseNumber) return null;
 
   const url = "https://wa.me/" + baseNumber + "?text=" + encodeURIComponent(buildWhatsAppText(payload));
-  return window.open(url, "_blank", "noopener");
+  return window.open(url, "_blank", "noopener,noreferrer");
 }
 
 function initContactForm(){
   const form = document.getElementById("contactForm");
   const note = document.getElementById("formNote");
   const btnText = document.getElementById("submitBtnText");
+  const submitBtn = form ? form.querySelector('button[type="submit"]') : null;
   if (!form) return;
 
   const rules = {
@@ -961,11 +1009,13 @@ function initContactForm(){
     const result = rules[field](input.value);
     const wrapper = input.closest(".form-field");
     if (result === true) {
-      wrapper.classList.remove("invalid");
+      if (wrapper) wrapper.classList.remove("invalid");
+      input.removeAttribute("aria-invalid");
       if (errEl) errEl.textContent = "";
       return true;
     } else {
-      wrapper.classList.add("invalid");
+      if (wrapper) wrapper.classList.add("invalid");
+      input.setAttribute("aria-invalid", "true");
       if (errEl) errEl.textContent = result;
       return false;
     }
@@ -977,6 +1027,7 @@ function initContactForm(){
   });
 
   function setBusy(busy, label){
+    if (submitBtn) submitBtn.disabled = busy;
     if (!btnText) return;
     if (busy) {
       btnText.dataset.original = btnText.textContent;
@@ -1188,108 +1239,7 @@ function initContactForm(){
 
 
 /* ---------------------------------------------------------------------- *
- * 10. HERO CANVAS — animated mathematical curve
- * ---------------------------------------------------------------------- */
-
-function initHeroCanvas(){
-  const canvas = document.getElementById("curveCanvas");
-  if (!canvas) return;
-  const ctx = canvas.getContext("2d");
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  let w = 0, h = 0;
-
-  function resize(){
-    const rect = canvas.getBoundingClientRect();
-    if (rect.width > 0 && rect.height > 0) {
-      canvas.width = rect.width * devicePixelRatio;
-      canvas.height = rect.height * devicePixelRatio;
-      ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0);
-      w = rect.width;
-      h = rect.height;
-    }
-  }
-
-  function ensureSize(retries = 0){
-    resize();
-    if ((w === 0 || h === 0) && retries < 12) {
-      setTimeout(() => ensureSize(retries + 1), retries < 3 ? 80 : 250);
-    }
-  }
-
-  ensureSize();
-  window.addEventListener("resize", resize, { passive: true });
-  window.addEventListener("orientationchange", resize, { passive: true });
-
-  if (typeof ResizeObserver !== "undefined") {
-    new ResizeObserver(resize).observe(canvas.parentElement || canvas);
-  }
-
-  let t = 0;
-  const points = 140;
-  let rafId = null;
-  let visible = true;
-
-  document.addEventListener("visibilitychange", () => {
-    visible = !document.hidden;
-    if (visible && !rafId) { rafId = requestAnimationFrame(draw); }
-  });
-
-  function draw(){
-    rafId = null;
-    if (!visible) return;
-
-    if (w === 0 || h === 0) {
-      resize();
-      rafId = requestAnimationFrame(draw);
-      return;
-    }
-
-    ctx.clearRect(0, 0, w, h);
-
-    ctx.strokeStyle = "rgba(255,255,255,0.05)";
-    ctx.lineWidth = 1;
-    for (let x = 0; x < w; x += 30) { ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,h); ctx.stroke(); }
-    for (let y = 0; y < h; y += 30) { ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(w,y); ctx.stroke(); }
-
-    ctx.beginPath();
-    for (let i = 0; i <= points; i++){
-      const p = i / points;
-      const angle = p * Math.PI * 2;
-      const x = w/2 + Math.sin(angle * 3 + t) * (w * 0.32) * Math.cos(t * 0.3);
-      const y = h/2 + Math.sin(angle * 2 + t * 1.3) * (h * 0.28);
-      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-    }
-    const grad = ctx.createLinearGradient(0, 0, w, h);
-    grad.addColorStop(0, "#2f5fff");
-    grad.addColorStop(1, "#00c2ff");
-    ctx.strokeStyle = grad;
-    ctx.lineWidth = 2;
-    ctx.shadowColor = "rgba(0,194,255,0.55)";
-    ctx.shadowBlur = 12;
-    ctx.stroke();
-    ctx.shadowBlur = 0;
-
-    const angle = t * 2;
-    const px = w/2 + Math.sin(angle * 3 + t) * (w * 0.32) * Math.cos(t * 0.3);
-    const py = h/2 + Math.sin(angle * 2 + t * 1.3) * (h * 0.28);
-    ctx.beginPath();
-    ctx.arc(px, py, 4, 0, Math.PI * 2);
-    ctx.fillStyle = "#ffffff";
-    ctx.shadowColor = "#00c2ff";
-    ctx.shadowBlur = 14;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-
-    t += reducedMotion ? 0 : 0.004;
-    rafId = requestAnimationFrame(draw);
-  }
-  rafId = requestAnimationFrame(draw);
-}
-
-
-/* ---------------------------------------------------------------------- *
- * 11. INIT
+ * 10. INIT
  * ---------------------------------------------------------------------- */
 
 document.addEventListener("DOMContentLoaded", () => {

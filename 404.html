@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404: Page Not Found | Mathematics Reality Lab</title>
+<meta name="description" content="The requested page could not be found on Mathematics Reality Lab.">
+<meta name="robots" content="noindex, follow">
+
+<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0f1f">
+
+<link rel="icon" type="image/png" sizes="any" href="asset/logo.png">
+<link rel="shortcut icon" type="image/png" href="asset/logo.png">
+<link rel="apple-touch-icon" href="asset/logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+<style>
+  .page-404 {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    position: relative;
+    background: #0b0f1f;
+    color: #ffffff;
+    overflow: hidden;
+  }
+  .math-glow-404 {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,229,255,0.18) 0%, rgba(47,95,255,0.12) 50%, transparent 70%);
+    filter: blur(50px);
+    pointer-events: none;
+  }
+  .card-404 {
+    position: relative;
+    z-index: 2;
+    max-width: 580px;
+    background: rgba(15, 23, 42, 0.75);
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    border-radius: 24px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 229, 255, 0.15);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+  .badge-404 {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: #00e5ff;
+    background: rgba(0, 229, 255, 0.1);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    padding: 0.35rem 0.85rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+  }
+  .title-404 {
+    font-size: clamp(3rem, 8vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(135deg, #ffffff 0%, #00e5ff 60%, #8b5bff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .subtitle-404 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #ffffff;
+  }
+  .desc-404 {
+    color: #94a3b8;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  .btn-404 {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #00c2ff, #2f5fff);
+    color: #ffffff;
+    font-weight: 600;
+    padding: 0.85rem 1.75rem;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 0 20px rgba(0, 194, 255, 0.4);
+  }
+  .btn-404:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(0, 194, 255, 0.6);
+  }
+</style>
+</head>
+<body class="page-404">
+  <div class="math-glow-404" aria-hidden="true"></div>
+
+  <main class="card-404">
+    <a href="/" class="nav-logo" style="justify-content: center; margin-bottom: 1.5rem;" aria-label="MRL Home">
+      <img src="asset/logo.png" alt="Mathematics Reality Lab Logo" width="44" height="44">
+    </a>
+
+    <div class="badge-404">ERROR 404 · UNDEFINED COORDINATE</div>
+    <h1 class="title-404">404</h1>
+    <h2 class="subtitle-404">Theorem Not Found</h2>
+    <p class="desc-404">
+      The mathematical concept or page you requested does not exist at this coordinate. Let's return to the laboratory workbench.
+    </p>
+
+    <a href="/" class="btn-404">
+      <span>Return to Home</span>
+      <span aria-hidden="true">→</span>
+    </a>
+  </main>
+</body>
+</html>

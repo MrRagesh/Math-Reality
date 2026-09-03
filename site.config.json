@@ -1,0 +1,13 @@
+{
+  "SITE_URL": "https://mathrealitylab.vercel.app",
+  "SITE_NAME": "Mathematics Reality Lab",
+  "SITE_NAME_SHORT": "MRL",
+  "DEFAULT_LOCALE": "en_IN",
+  "DEFAULT_IMAGE": "asset/logo.png",
+  "TITLE": "Mathematics Reality Lab | Applied Math & Real-World Experiments",
+  "DESCRIPTION": "Mathematics Reality Lab (MRL) turns theory into hands-on applied-mathematics experiments: engineering maths, STEM projects, and real-world modelling for students.",
+  "EMAIL": "mathrealitylab@gmail.com",
+  "PHONE": "+91 96883 32441",
+  "REGISTRATION_ID": "UDYAM-TN-27-0149456",
+  "WHATSAPP_NUMBER": "919688332441"
+}

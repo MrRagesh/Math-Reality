@@ -1,0 +1,10 @@
+# ==========================================================================
+# Mathematics Reality Lab — robots.txt
+# Generated via build.js from site.config.json
+# ==========================================================================
+
+User-agent: *
+Allow: /
+
+# Absolute URL to sitemap
+Sitemap: https://mathrealitylab.vercel.app/sitemap.xml
